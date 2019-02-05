@@ -2,18 +2,28 @@ package hw1;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static java.lang.System.setProperty;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.collection.ArrayMatching.arrayContaining;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.Every.everyItem;
 
 public class Test1 {
 
     @BeforeSuite
     public void BeforeSuite(){
-        setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+        setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
     }
 
     @Test
@@ -40,12 +50,16 @@ public class Test1 {
         //step 5: assert browser title = step 2
 
         //step 6: assert there are 4 items ("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS") displayed with proper texts on the header
+        List<String> elements = chromeDriver
+                .findElements(By.xpath("//*[not(self::iframe)]//*[@class='uui-navigation nav navbar-nav m-l8']/li"))
+                .stream().map(WebElement::getText).collect(Collectors.toList());
+        Assert.assertEquals(elements.toArray(), new String[]{"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"});
 
         //step 7: assert there are 4 images displayed
-        Assert.assertTrue(chromeDriver.findElement(By.cssSelector("[class='icons-benefit icon-practise']")).isDisplayed());
-        Assert.assertTrue(chromeDriver.findElement(By.cssSelector("[class='icons-benefit icon-custom']")).isDisplayed());
-        Assert.assertTrue(chromeDriver.findElement(By.cssSelector("[class='icons-benefit icon-multi']")).isDisplayed());
-        Assert.assertTrue(chromeDriver.findElement(By.cssSelector("[class='icons-benefit icon-base']")).isDisplayed());
+        List<String> imageUrls = chromeDriver.findElements(By.cssSelector("[class='row clerafix benefits'] [class^='icons-benefit icon-']"))
+                .stream().map(x -> x.getCssValue("background-image")).collect(Collectors.toList());
+        Assert.assertEquals(4, imageUrls.size());
+        assertThat(imageUrls, either(everyItem(containsString(".png"))).or(everyItem(containsString(".jpg"))));
 
         //step 8: assert there are 4 texts below 4 images
 
