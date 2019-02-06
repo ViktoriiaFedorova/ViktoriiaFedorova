@@ -8,22 +8,16 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.lang.System.setProperty;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.collection.ArrayMatching.arrayContaining;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.hamcrest.core.Every.everyItem;
 
 public class Test1 {
 
     @BeforeSuite
     public void BeforeSuite(){
-        setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
+        setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
     }
 
     @Test
@@ -51,17 +45,33 @@ public class Test1 {
 
         //step 6: assert there are 4 items ("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS") displayed with proper texts on the header
         List<String> elements = chromeDriver
-                .findElements(By.xpath("//*[not(self::iframe)]//*[@class='uui-navigation nav navbar-nav m-l8']/li"))
+                .findElements(By.cssSelector("[class='uui-navigation nav navbar-nav m-l8'] > li"))
                 .stream().map(WebElement::getText).collect(Collectors.toList());
         Assert.assertEquals(elements.toArray(), new String[]{"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"});
 
         //step 7: assert there are 4 images displayed
         List<String> imageUrls = chromeDriver.findElements(By.cssSelector("[class='row clerafix benefits'] [class^='icons-benefit icon-']"))
                 .stream().map(x -> x.getCssValue("background-image")).collect(Collectors.toList());
-        Assert.assertEquals(4, imageUrls.size());
-        assertThat(imageUrls, either(everyItem(containsString(".png"))).or(everyItem(containsString(".jpg"))));
+        Assert.assertEquals(imageUrls.toArray(),
+                new String[]{"url(\"https://epam.github.io/JDI/images/sprite.png\")",
+                        "url(\"https://epam.github.io/JDI/images/sprite.png\")",
+                        "url(\"https://epam.github.io/JDI/images/sprite.png\")",
+                        "url(\"https://epam.github.io/JDI/images/sprite.png\")"});
 
         //step 8: assert there are 4 texts below 4 images
+        List<String> imageTexts = chromeDriver.findElements(By.cssSelector("[class='row clerafix benefits'] [class^='benefit-txt']"))
+                .stream().map(x -> x.getText()).collect(Collectors.toList());
+        Assert.assertEquals(imageTexts.toArray(),
+                new String[]{"To include good practices\n" +
+                        "and ideas from successful\n" +
+                        "EPAM project",
+                        "To be flexible and\n" +
+                                "customizable",
+                        "To be multiplatform",
+                        "Already have good base\n" +
+                                "(about 20 internal and\n" +
+                                "some external projects),\n" +
+                                "wish to get more…"});
 
         //step 9: assert main headers texts
         Assert.assertEquals(chromeDriver.findElement(By.cssSelector("[name='main-title']")).getText().toLowerCase(),
@@ -78,6 +88,7 @@ public class Test1 {
         Assert.assertTrue(chromeDriver.switchTo().frame(chromeDriver.findElement(By.cssSelector("[id='iframe']"))).findElement(By.cssSelector("[id='epam_logo']")).isDisplayed());
 
         //step 12: switch to original window back (from iframe)
+        chromeDriver.switchTo().defaultContent();
 
         //step 13: assert sub header text
         Assert.assertEquals(chromeDriver.findElement(By.cssSelector("[target='_blank']")).getText().toLowerCase(), "JDI Github".toLowerCase());
