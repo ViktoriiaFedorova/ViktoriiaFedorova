@@ -16,8 +16,9 @@ public enum HeaderItems {
         this.itemText = itemText;
     }
 
-    // TODO: use toString
-    public String getItemText() {
+    //✅ TODO: use toString
+    @Override
+    public String toString() {
         return itemText;
     }
 

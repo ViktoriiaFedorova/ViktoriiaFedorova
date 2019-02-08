@@ -13,6 +13,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 public class Test1 extends SeleniumBase {
     private IndexPage indexPage;
     private WebDriver chromeDriver;
@@ -52,8 +54,8 @@ public class Test1 extends SeleniumBase {
 
         //step 6: assert there are 4 items ("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS") displayed with proper texts on the header
         //(!) ✅ TODO: method should be universal, it should get parameter[s]
-        indexPage.checkHeaderItems(new String[] {HeaderItems.HOME.getItemText(), HeaderItems.CONTACT_FORM.getItemText(),
-                        HeaderItems.SERVICE.getItemText(), HeaderItems.METALS_COLORS.getItemText()});
+        indexPage.checkHeaderItems(new String[] {HeaderItems.HOME.toString(), HeaderItems.CONTACT_FORM.toString(),
+                        HeaderItems.SERVICE.toString(), HeaderItems.METALS_COLORS.toString()});
 
         //step 7: assert there are 4 images displayed
         //(!) ✅ TODO: method should be universal, it should get parameter[s]
@@ -69,11 +71,9 @@ public class Test1 extends SeleniumBase {
         //step 9: assert main headers texts
         indexPage.checkHeaderTexts(IndexPageTexts.MAIN_TITLE.getText(), IndexPageTexts.JDI_TEXT.getText());
 
-        //TODO: method should be universal, it should get parameter[s]
         //step 10: assert iframe exists in the center of the page
         indexPage.checkIFrame();
 
-        //TODO: method should be universal, it should get parameter[s]
         //step 11: assert there is EPAM logo in the left-top corner in the iframe
         indexPage.checkIFrameLogo();
 
@@ -88,11 +88,9 @@ public class Test1 extends SeleniumBase {
         //step 14: assert 'JDI GITHUB' is a link and its URL = https://github.com/epam/JDI
         indexPage.checkGitLink(IndexPageTexts.SUB_HEADER);
 
-        //TODO: method should be universal, it should get parameter[s]
         //step 15: assert there is left section
         indexPage.checkLeftSection();
 
-        //TODO: method should be universal, it should get parameter[s]
         //step 16: assert there is footer
         indexPage.checkFooter();
     }
