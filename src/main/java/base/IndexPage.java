@@ -1,6 +1,7 @@
 package base;
 
 import enums.HeaderItems;
+import enums.IndexPageTexts;
 import enums.Users;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -64,51 +65,32 @@ public class IndexPage {
         Assert.assertEquals(userName.getText(), user.getUserName());
     }
 
-    public void checkPageTitle(){
-        Assert.assertEquals(chromeDriver.getTitle(), "Home Page");
+    public void checkPageTitle(IndexPageTexts pageTitle){
+        Assert.assertEquals(chromeDriver.getTitle().toLowerCase(), pageTitle.getText());
     }
 
-    public void checkHeaderItems(){
+    public void checkHeaderItems(String [] headerItems){
         List<String> elements = chromeDriver
                 .findElements(By.cssSelector("[class='uui-navigation nav navbar-nav m-l8'] > li"))
                 .stream().map(WebElement::getText).collect(Collectors.toList());
-        Assert.assertEquals(elements.toArray(), new String[]{HeaderItems.HOME.getItemText(), HeaderItems.CONTACTFORM.getItemText(),
-                HeaderItems.SERVICE.getItemText(), HeaderItems.METALSCOLORS.getItemText()});
+        Assert.assertEquals(elements.toArray(), headerItems);
     }
 
-    public void checkImages(){
+    public void checkImages(String[] imagesURLs){
         List<String> imageUrls = chromeDriver.findElements(By.cssSelector("[class='row clerafix benefits'] [class^='icons-benefit icon-']"))
                 .stream().map(x -> x.getCssValue("background-image")).collect(Collectors.toList());
-        Assert.assertEquals(imageUrls.toArray(),
-                new String[]{"url(\"https://epam.github.io/JDI/images/sprite.png\")",
-                        "url(\"https://epam.github.io/JDI/images/sprite.png\")",
-                        "url(\"https://epam.github.io/JDI/images/sprite.png\")",
-                        "url(\"https://epam.github.io/JDI/images/sprite.png\")"});
+        Assert.assertEquals(imageUrls.toArray(),imagesURLs);
     }
 
-    public void checkImagesTexts(){
+    public void checkImagesTexts(String[] imagesTexts){
         List<String> imageTexts = chromeDriver.findElements(By.cssSelector("[class='row clerafix benefits'] [class^='benefit-txt']"))
-                .stream().map(x -> x.getText()).collect(Collectors.toList());
-        Assert.assertEquals(imageTexts.toArray(),
-                new String[]{"To include good practices\n" +
-                        "and ideas from successful\n" +
-                        "EPAM project",
-                        "To be flexible and\n" +
-                                "customizable",
-                        "To be multiplatform",
-                        "Already have good base\n" +
-                                "(about 20 internal and\n" +
-                                "some external projects),\n" +
-                                "wish to get more…"});
+                .stream().map(x -> x.getText().toLowerCase()).collect(Collectors.toList());
+        Assert.assertEquals(imageTexts.toArray(), imagesTexts);
     }
 
-    public void checkHeaderTexts(){
-        Assert.assertEquals(chromeDriver.findElement(By.cssSelector("[name='main-title']")).getText().toLowerCase(),
-                "EPAM framework Wishes…".toLowerCase());
-        Assert.assertEquals(chromeDriver.findElement(By.cssSelector("[name='jdi-text']")).getText().toLowerCase(),
-                ("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-                        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat " +
-                        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.").toLowerCase());
+    public void checkHeaderTexts(String mainTitle, String jdiText){
+        Assert.assertEquals(chromeDriver.findElement(By.cssSelector("[name='main-title']")).getText().toLowerCase(), mainTitle);
+        Assert.assertEquals(chromeDriver.findElement(By.cssSelector("[name='jdi-text']")).getText().toLowerCase(), jdiText);
     }
 
     public void checkIFrame(){
@@ -125,13 +107,13 @@ public class IndexPage {
         chromeDriver.switchTo().defaultContent();
     }
 
-    public void checkSubHeaderText(){
-        Assert.assertEquals(subHeader.getText().toLowerCase(), "JDI Github".toLowerCase());
+    public void checkSubHeaderText(IndexPageTexts subHeader){
+        Assert.assertEquals(subHeader.getText().toLowerCase(), subHeader.getText());
     }
 
-    public void checkGitLink(){
-        Assert.assertTrue(chromeDriver.findElement(By.linkText("JDI Github".toUpperCase())).isDisplayed());
-        Assert.assertEquals(chromeDriver.findElement(By.linkText("JDI Github".toUpperCase())).getAttribute("href"), "https://github.com/epam/JDI");
+    public void checkGitLink(IndexPageTexts link){
+        Assert.assertTrue(chromeDriver.findElement(By.linkText(link.getText().toUpperCase())).isDisplayed());
+        Assert.assertEquals(chromeDriver.findElement(By.linkText(link.getText().toUpperCase())).getAttribute("href"), link.getLinkURL());
     }
 
     public void checkLeftSection(){
