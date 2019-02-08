@@ -12,7 +12,7 @@ public enum HeaderItems {
     HeaderItems(String itemText) {
         this.itemText = itemText;
     }
-
+    //TODO: use toString
     public String getItemText() {
         return itemText;
     }
