@@ -13,23 +13,24 @@ import org.testng.annotations.*;
 
 public class ThreeSmokeTests extends SeleniumBase {
     private IndexPage indexPage;
-    private WebDriver chromeDriver;
+    private ThreadLocal<WebDriver> threads = new ThreadLocal<>();
 
-    @BeforeTest
-    public void initTest(){
-        chromeDriver = new ChromeDriver();
+    @BeforeMethod
+    public synchronized void initTest(){
+        WebDriver chromeDriver = new ChromeDriver();
         chromeDriver.manage().window().maximize();
-        indexPage = PageFactory.initElements(chromeDriver, IndexPage.class);
+        threads.set(chromeDriver);
+        indexPage = PageFactory.initElements(threads.get(), IndexPage.class);
     }
 
-    @AfterTest
+    @AfterMethod
     //step 17: close browser
-    public void finishTest(){
-        chromeDriver.close();
+    public synchronized void finishTest(){
+        threads.get().close();
     }
 
     @Test (groups = {"Smoke"})
-    public  void test1Smoke1(){
+    public synchronized  void test1Smoke1(){
 
         //step 1: open test site by URL https://epam.github.io/JDI/
         indexPage.open();
@@ -84,7 +85,7 @@ public class ThreeSmokeTests extends SeleniumBase {
     }
 
     @Test (groups = {"Smoke"})
-    public  void test1Smoke2(){
+    public synchronized void test1Smoke2(){
 
         //step 1: open test site by URL https://epam.github.io/JDI/
         indexPage.open();
@@ -139,7 +140,7 @@ public class ThreeSmokeTests extends SeleniumBase {
     }
 
     @Test (groups = {"Smoke"})
-    public  void test1Smoke3(){
+    public synchronized  void test1Smoke3(){
 
         //step 1: open test site by URL https://epam.github.io/JDI/
         indexPage.open();

@@ -5,7 +5,7 @@
     <test name="Smoke Test Set">
 
         <classes>
-            <class name="hw2.ex3.TestAnnotate"/>
+            <class name="hw2.ex3.TestWithAnnotations"/>
         </classes>
 
     </test>
