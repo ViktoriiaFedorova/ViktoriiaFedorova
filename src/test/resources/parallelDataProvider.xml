@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke Suite" data-provider-thread-count="4">
+    <!--<suite name="TestNG Suite" parallel="classes" thread-count="3">-->
+    <test name="Smoke Test Set">
+
+        <classes>
+            <class name="hw2.ex1.TestWithDataProvider"/>
+        </classes>
+
+    </test>
+</suite>

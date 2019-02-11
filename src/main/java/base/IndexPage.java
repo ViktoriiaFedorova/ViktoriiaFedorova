@@ -1,6 +1,5 @@
 package base;
 
-import enums.HeaderItems;
 import enums.IndexPageTexts;
 import enums.Users;
 import org.openqa.selenium.By;
@@ -122,5 +121,11 @@ public class IndexPage {
 
     public void checkFooter(){
         Assert.assertTrue(footer.isDisplayed());
+    }
+
+    public void checkBenefitTexts(String benefitText){
+        List<String> imageTexts = chromeDriver.findElements(By.cssSelector("[class='row clerafix benefits'] [class^='benefit-txt']"))
+                .stream().map(x -> x.getText().toLowerCase()).collect(Collectors.toList());
+        Assert.assertEquals(imageTexts.toArray(), benefitText);
     }
 }

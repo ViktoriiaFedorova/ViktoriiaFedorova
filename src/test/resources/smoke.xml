@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke Suite" parallel="methods" thread-count="3">
+    <!--<suite name="TestNG Suite" parallel="classes" thread-count="3">-->
+    <test name="Smoke Test Set">
+
+        <groups>
+            <run>
+                <include name="Smoke"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="hw2.ex2.ThreeSmokeTests"/>
+            <!--<class name="hw2.ex2.ThreeRegressionTests"/>-->
+            <!--<class name="hw2.ex2.TwoRegressionOneSmokeTests"/>-->
+            <!--<class name="hw2.ex2.ThreeSmokeRegressionTests"/>-->
+        </classes>
+
+    </test>
+</suite>
