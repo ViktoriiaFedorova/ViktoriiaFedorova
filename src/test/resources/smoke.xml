@@ -6,7 +6,7 @@
 
         <groups>
             <run>
-                <exclude name="another group"/>
+                <exclude name="Regression"/>
             </run>
         </groups>
 

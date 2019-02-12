@@ -15,19 +15,21 @@ import org.testng.annotations.Test;
 
 public class TwoRegressionOneSmokeTests extends SeleniumBase {
     private IndexPage indexPage;
+    private ThreadLocal<WebDriver> threads = new ThreadLocal<>();
     private WebDriver chromeDriver;
 
     @BeforeMethod
-    public void initTest(){
+    public synchronized void initTest(){
         chromeDriver = new ChromeDriver();
         chromeDriver.manage().window().maximize();
+        threads.set(chromeDriver);
         indexPage = PageFactory.initElements(chromeDriver, IndexPage.class);
     }
 
     @AfterMethod
     //step 17: close browser
-    public void finishTest(){
-        chromeDriver.close();
+    public synchronized void finishTest(){
+        threads.get().close();
     }
 
     @Test (groups = {"Regression"})
@@ -40,10 +42,10 @@ public class TwoRegressionOneSmokeTests extends SeleniumBase {
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
 
         //step 3: perform login
-        indexPage.login(Users.PITERCHAILOVSKII);
+        //indexPage.login(Users.PITERCHAILOVSKII);
 
         //step 4: assert user is logged in (check user name in the left-top corner)
-        indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
+        //indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: assert browser title
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
@@ -95,10 +97,10 @@ public class TwoRegressionOneSmokeTests extends SeleniumBase {
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
 
         //step 3: perform login
-        indexPage.login(Users.PITERCHAILOVSKII);
+        //indexPage.login(Users.PITERCHAILOVSKII);
 
         //step 4: assert user is logged in (check user name in the left-top corner)
-        indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
+        //indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: assert browser title
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
@@ -150,10 +152,10 @@ public class TwoRegressionOneSmokeTests extends SeleniumBase {
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
 
         //step 3: perform login
-        indexPage.login(Users.PITERCHAILOVSKII);
+        //indexPage.login(Users.PITERCHAILOVSKII);
 
         //step 4: assert user is logged in (check user name in the left-top corner)
-        indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
+        //indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: assert browser title
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);

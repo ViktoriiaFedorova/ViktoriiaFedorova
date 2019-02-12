@@ -11,6 +11,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.*;
 
+import java.util.concurrent.TimeUnit;
+
 public class ThreeSmokeTests extends SeleniumBase {
     private IndexPage indexPage;
     private ThreadLocal<WebDriver> threads = new ThreadLocal<>();
@@ -30,7 +32,7 @@ public class ThreeSmokeTests extends SeleniumBase {
     }
 
     @Test (groups = {"Smoke"})
-    public synchronized  void test1Smoke1(){
+    public  void test1Smoke1(){
 
         //step 1: open test site by URL https://epam.github.io/JDI/
         indexPage.open();

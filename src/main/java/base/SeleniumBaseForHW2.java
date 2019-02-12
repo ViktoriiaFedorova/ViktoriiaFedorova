@@ -9,11 +9,11 @@ public abstract class SeleniumBaseForHW2 {
 
     @BeforeSuite
     public void beforeSuite() {
-        setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+        setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
     }
 
     @AfterSuite
     public void afterSuite() {
-        System.out.println(System.currentTimeMillis());
+        System.out.println("test takes" + System.currentTimeMillis());
     }
 }
