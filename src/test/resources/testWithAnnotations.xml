@@ -1,8 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Smoke Suite" parallel="methods" thread-count="3">
-    <!--<suite name="TestNG Suite" parallel="classes" thread-count="3">-->
-    <test name="Smoke Test Set">
+<suite name="Suite of Tests with Annotations">
+    <test name="Annotated Test Set">
 
         <classes>
             <class name="hw2.ex3.TestWithAnnotations"/>

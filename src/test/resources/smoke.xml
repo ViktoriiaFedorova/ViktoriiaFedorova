@@ -1,7 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Smoke Suite">
-    <!--<suite name="TestNG Suite" parallel="classes" thread-count="3">-->
     <test name="Smoke Test Set" parallel="methods" thread-count="3">
 
         <groups>
@@ -12,9 +11,9 @@
 
         <classes>
             <class name="hw2.ex2.ThreeSmokeTests"/>
-            <!--<class name="hw2.ex2.ThreeRegressionTests"/>-->
-            <!--<class name="hw2.ex2.TwoRegressionOneSmokeTests"/>-->
-            <!--<class name="hw2.ex2.ThreeSmokeRegressionTests"/>-->
+            <class name="hw2.ex2.ThreeRegressionTests"/>
+            <class name="hw2.ex2.TwoRegressionOneSmokeTests"/>
+            <class name="hw2.ex2.ThreeSmokeRegressionTests"/>
         </classes>
 
     </test>

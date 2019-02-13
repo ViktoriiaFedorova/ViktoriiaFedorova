@@ -87,7 +87,7 @@ public class ThreeSmokeTests extends SeleniumBase {
     }
 
     @Test (groups = {"Smoke"})
-    public synchronized void test1Smoke2(){
+    public void test1Smoke2(){
 
         //step 1: open test site by URL https://epam.github.io/JDI/
         indexPage.open();
@@ -142,7 +142,7 @@ public class ThreeSmokeTests extends SeleniumBase {
     }
 
     @Test (groups = {"Smoke"})
-    public synchronized  void test1Smoke3(){
+    public void test1Smoke3(){
 
         //step 1: open test site by URL https://epam.github.io/JDI/
         indexPage.open();

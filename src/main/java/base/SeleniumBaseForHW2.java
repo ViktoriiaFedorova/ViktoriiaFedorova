@@ -9,7 +9,7 @@ public abstract class SeleniumBaseForHW2 {
 
     @BeforeSuite
     public void beforeSuite() {
-        setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
+        setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
     }
 
     @AfterSuite

@@ -16,14 +16,13 @@ import org.testng.annotations.Test;
 public class ThreeSmokeRegressionTests extends SeleniumBase {
     private IndexPage indexPage;
     private ThreadLocal<WebDriver> threads = new ThreadLocal<>();
-    private WebDriver chromeDriver;
 
     @BeforeMethod
     public synchronized void initTest(){
-        chromeDriver = new ChromeDriver();
+        WebDriver chromeDriver = new ChromeDriver();
         chromeDriver.manage().window().maximize();
         threads.set(chromeDriver);
-        indexPage = PageFactory.initElements(chromeDriver, IndexPage.class);
+        indexPage = PageFactory.initElements(threads.get(), IndexPage.class);
     }
 
     @AfterMethod
@@ -42,10 +41,10 @@ public class ThreeSmokeRegressionTests extends SeleniumBase {
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
 
         //step 3: perform login
-        //indexPage.login(Users.PITERCHAILOVSKII);
+        indexPage.login(Users.PITERCHAILOVSKII);
 
         //step 4: assert user is logged in (check user name in the left-top corner)
-        //indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
+        indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: assert browser title
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
@@ -97,10 +96,10 @@ public class ThreeSmokeRegressionTests extends SeleniumBase {
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
 
         //step 3: perform login
-        //indexPage.login(Users.PITERCHAILOVSKII);
+        indexPage.login(Users.PITERCHAILOVSKII);
 
         //step 4: assert user is logged in (check user name in the left-top corner)
-        //indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
+        indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: assert browser title
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
@@ -142,7 +141,7 @@ public class ThreeSmokeRegressionTests extends SeleniumBase {
         indexPage.checkFooter();
     }
 
-    @Test (groups = {"Smoke", "Regression'"})
+    @Test (groups = {"Smoke", "Regression"})
     public  void test4SmokeRegression3(){
 
         //step 1: open test site by URL https://epam.github.io/JDI/
@@ -152,10 +151,10 @@ public class ThreeSmokeRegressionTests extends SeleniumBase {
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
 
         //step 3: perform login
-        //indexPage.login(Users.PITERCHAILOVSKII);
+        indexPage.login(Users.PITERCHAILOVSKII);
 
         //step 4: assert user is logged in (check user name in the left-top corner)
-        //indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
+        indexPage.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: assert browser title
         indexPage.checkPageTitle(IndexPageTexts.PAGE_TITLE);
