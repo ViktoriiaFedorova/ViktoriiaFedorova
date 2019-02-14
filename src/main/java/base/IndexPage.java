@@ -128,19 +128,8 @@ public class IndexPage {
 
     public void checkBenefitTexts(String iconName, String benefitText) {
 
-        WebElement icon = chromeDriver
-                .findElement(
-                        By.xpath("//*[@class='row clerafix benefits']//div[@class='benefit' " +
-                                "and .//*[contains(@class,'" + iconName + "')]]"));
-
-
-//  //*[@class='row clerafix benefits']//div[@class='benefit' and .//*[contains(@class,'icon-practise')]]
-//        List<String> imageTexts = chromeDriver
-//                .findElements(By.cssSelector("[class='row clerafix benefits'] [class^='benefit-txt']"))
-//                .stream()
-//                .map(x -> x.getText().toLowerCase())
-//                .collect(Collectors.toList());
-
+        WebElement icon = chromeDriver.findElement
+                (By.xpath("//*[@class='row clerafix benefits']//div[@class='benefit' " + "and .//*[contains(@class,'" + iconName + "')]]"));
 
         Assert.assertEquals(icon.getText(), benefitText);
     }

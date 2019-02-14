@@ -1,7 +1,6 @@
 package hw2.ex3;
 
 import base.IndexPage;
-import base.SeleniumBase;
 import base.SeleniumBaseForHW2;
 import enums.BenefitsSection;
 import enums.HeaderItems;
@@ -16,23 +15,23 @@ public class TestWithAnnotations extends SeleniumBaseForHW2 {
     private IndexPage indexPage;
     private WebDriver chromeDriver;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initDriver(){
         chromeDriver = new ChromeDriver();
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initTest(){
         chromeDriver.manage().window().maximize();
         indexPage = PageFactory.initElements(chromeDriver, IndexPage.class);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void finishTest(){
-        System.out.println(chromeDriver.getTitle());
+        System.out.println("§ Page title: " + chromeDriver.getTitle());
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void finishClass(){
         chromeDriver.close();
     }

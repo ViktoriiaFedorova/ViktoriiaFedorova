@@ -3,17 +3,20 @@ package base;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static java.lang.System.setProperty;
+import static java.lang.System.*;
 
 public abstract class SeleniumBaseForHW2 {
 
-    @BeforeSuite
+    private long testStart;
+
+    @BeforeSuite(alwaysRun = true)
     public void beforeSuite() {
         setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+        testStart = currentTimeMillis();
     }
 
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void afterSuite() {
-        System.out.println("test takes" + System.currentTimeMillis());
+        out.println("⌛ Test duration: " + ((currentTimeMillis() - testStart)/1000) + " s");
     }
 }

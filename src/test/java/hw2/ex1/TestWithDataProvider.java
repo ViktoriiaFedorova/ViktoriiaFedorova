@@ -7,10 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
 public class TestWithDataProvider extends SeleniumBase {
     private ThreadLocal<WebDriver> threads = new ThreadLocal<>();
 
@@ -25,18 +21,16 @@ public class TestWithDataProvider extends SeleniumBase {
     }
 
     private IndexPage indexPage;
-    private WebDriver chromeDriver;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public synchronized void initTest(){
-        chromeDriver = new ChromeDriver();
+        WebDriver chromeDriver = new ChromeDriver();
         chromeDriver.manage().window().maximize();
         indexPage = PageFactory.initElements(chromeDriver, IndexPage.class);
         threads.set(chromeDriver);
     }
 
-    @AfterMethod
-    //step 17: close browser
+    @AfterMethod(alwaysRun = true)
     public synchronized void finishTest() {
         threads.get().close();
     }
