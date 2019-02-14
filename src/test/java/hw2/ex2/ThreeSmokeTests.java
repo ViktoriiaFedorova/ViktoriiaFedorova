@@ -17,7 +17,7 @@ public class ThreeSmokeTests extends SeleniumBase {
     private IndexPage indexPage;
     private ThreadLocal<WebDriver> threads = new ThreadLocal<>();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public synchronized void initTest(){
         WebDriver chromeDriver = new ChromeDriver();
         chromeDriver.manage().window().maximize();
@@ -25,7 +25,7 @@ public class ThreeSmokeTests extends SeleniumBase {
         indexPage = PageFactory.initElements(threads.get(), IndexPage.class);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     //step 17: close browser
     public synchronized void finishTest(){
         threads.get().close();

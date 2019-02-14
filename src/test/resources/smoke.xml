@@ -5,16 +5,20 @@
 
         <groups>
             <run>
-                <exclude name="Regression"/>
+                <include name="Smoke"/>
             </run>
         </groups>
 
-        <classes>
-            <class name="hw2.ex2.ThreeSmokeTests"/>
-            <class name="hw2.ex2.ThreeRegressionTests"/>
-            <class name="hw2.ex2.TwoRegressionOneSmokeTests"/>
-            <class name="hw2.ex2.ThreeSmokeRegressionTests"/>
-        </classes>
+        <packages>
+            <package name="hw2.ex2"/>
+        </packages>
+
+        <!--<classes>-->
+            <!--<class name="hw2.ex2.ThreeSmokeTests"/>-->
+            <!--<class name="hw2.ex2.ThreeRegressionTests"/>-->
+            <!--<class name="hw2.ex2.TwoRegressionOneSmokeTests"/>-->
+            <!--<class name="hw2.ex2.ThreeSmokeRegressionTests"/>-->
+        <!--</classes>-->
 
     </test>
 </suite>
