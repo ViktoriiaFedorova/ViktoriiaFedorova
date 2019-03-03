@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Smoke Suite">
-    <test name="Smoke Test Set" parallel="methods" thread-count="3">
+<suite name="Smoke Suite" parallel="methods" thread-count="3">
+    <test name="Smoke Test Set" >
 
         <groups>
             <run>
-                <include name="Smoke"/>
+                <include name="Smoke1"/>
             </run>
         </groups>
 

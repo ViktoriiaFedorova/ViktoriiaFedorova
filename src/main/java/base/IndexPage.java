@@ -6,8 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 import org.testng.Assert;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +55,7 @@ public class IndexPage {
 //    private List<WebElement> benefitsList;
 
     public void open() {
+        System.out.println("_" + Thread.currentThread().getId() + "_");
         chromeDriver.get("https://epam.github.io/JDI/");
     }
 
