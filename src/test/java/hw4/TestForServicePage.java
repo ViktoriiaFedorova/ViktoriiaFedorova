@@ -4,32 +4,29 @@ import base.hw4.IndexPageSelenide;
 import base.hw4.SelenideBase;
 import enums.IndexPageTexts;
 import enums.Users;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
+import enums.hw4.ServicePageOptions;
 import org.testng.annotations.*;
+
+import static com.codeborne.selenide.Selenide.*;
 
 public class TestForServicePage extends SelenideBase {
 
     private IndexPageSelenide indexPageSelenide;
-    private WebDriver chromeDriverSelenide;
 
+    //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
     public void initTest(){
-        indexPageSelenide = PageFactory.initElements(chromeDriverSelenide, IndexPageSelenide.class);
+        indexPageSelenide = open("https://epam.github.io/JDI/index.html", IndexPageSelenide.class);
     }
 
     @AfterMethod
-    //step 17: close browser
+    //close browser
     public void finishTest(){
-        chromeDriverSelenide.close();
+        close();
     }
 
     @Test
     public void testForServicePage(){
-
-        //step 1: open test site by URL https://epam.github.io/JDI/
-        indexPageSelenide.openIndexPage();
 
         //step 2: assert browser title
         indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
@@ -41,6 +38,8 @@ public class TestForServicePage extends SelenideBase {
         indexPageSelenide.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: click on 'Service' in the header and check dropdown contains options "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
+        indexPageSelenide.checkServiceDropdownOptions(ServicePageOptions.serviceOptionsList());
+
         //step 6: click on 'Service' in the left section and check dropdown contains options "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
         //step 7: open Service -> Different Elements page from header
         //step 8: check Different Elements page contains 4 checkboxes, 4 radios, 1 dropdown, 2 buttons
