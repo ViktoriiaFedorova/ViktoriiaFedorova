@@ -40,8 +40,8 @@ public class TestForServicePage extends SelenideBase {
         indexPageSelenide.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: click on 'Service' in the header and check dropdown contains options "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
-        //indexPageSelenide.checkServiceDropdownOptionsFromHeader
-               // (Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
+        indexPageSelenide.checkServiceDropdownOptionsFromHeader
+               (Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
 
         //step 6: click on 'Service' in the left section and check dropdown contains options "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
         indexPageSelenide.checkServiceDropdownOptionsFromLeftNav
