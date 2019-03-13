@@ -21,7 +21,7 @@ public enum ServicePageOptions {
     }
 
     public String getText() {
-        return text.toLowerCase();
+        return text.toUpperCase();
     }
 
     public static List<ServicePageOptions> serviceOptionsList() {

@@ -7,6 +7,8 @@ import enums.Users;
 import enums.hw4.ServicePageOptions;
 import org.testng.annotations.*;
 
+import java.util.Arrays;
+
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestForServicePage extends SelenideBase {
@@ -38,9 +40,13 @@ public class TestForServicePage extends SelenideBase {
         indexPageSelenide.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: click on 'Service' in the header and check dropdown contains options "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
-        indexPageSelenide.checkServiceDropdownOptions(ServicePageOptions.serviceOptionsList());
+        //indexPageSelenide.checkServiceDropdownOptionsFromHeader
+               // (Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
 
         //step 6: click on 'Service' in the left section and check dropdown contains options "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
+        indexPageSelenide.checkServiceDropdownOptionsFromLeftNav
+                (Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
+
         //step 7: open Service -> Different Elements page from header
         //step 8: check Different Elements page contains 4 checkboxes, 4 radios, 1 dropdown, 2 buttons
         //step 9: assert there is right section

@@ -1,14 +1,17 @@
 package base.hw4;
 
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import enums.IndexPageTexts;
 import enums.Users;
 import enums.hw4.ServicePageOptions;
-import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
-
-import java.util.List;
 
 public class IndexPageSelenide {
 
@@ -27,6 +30,12 @@ public class IndexPageSelenide {
     @FindBy(css = "[id = 'user-name']")
     private SelenideElement userName;
 
+    @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8'] [class='dropdown-toggle']")
+    private SelenideElement headerItemService;
+
+    @FindBy(css = "div>ul>li>a[ui='label']")
+    private SelenideElement leftNavItemService;
+
     public void login(Users user) {
         loginIcon.click();
         userField.setValue(user.getName());
@@ -35,14 +44,24 @@ public class IndexPageSelenide {
     }
 
     public void checkPageTitle(IndexPageTexts pageTitle) {
-        Assert.assertEquals(Selenide.title().toLowerCase(), pageTitle.getText());
+        Assert.assertEquals(title().toLowerCase(), pageTitle.getText());
+        //Assert.assertEquals(chromeDriver.getTitle().toLowerCase(), pageTitle.getText());
     }
 
     public void checkUserLogIn(Users user) {
         Assert.assertEquals(userName.getText(), user.getUserName());
     }
 
-    public void checkServiceDropdownOptions (List<ServicePageOptions> serviceOptions){
+    public void checkServiceDropdownOptionsFromHeader (String[] defaultServiceOptions){
+        headerItemService.click();
+        $$(By.cssSelector("[class='uui-navigation nav navbar-nav m-l8'] [class='dropdown-menu'] > li"))
+                    .shouldBe(CollectionCondition.texts(defaultServiceOptions));
+    }
+
+    public void checkServiceDropdownOptionsFromLeftNav (String[] defaultServiceOptions){
+        leftNavItemService.click();
+        $$(By.cssSelector("div>ul>li>ul[class='sub'] > li"))
+                .shouldBe(CollectionCondition.texts(defaultServiceOptions));
     }
 
 }
