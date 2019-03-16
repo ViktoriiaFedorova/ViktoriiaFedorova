@@ -6,10 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.testng.Assert;
 
-import javax.annotation.concurrent.ThreadSafe;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,9 +48,6 @@ public class IndexPage {
 
     @FindBy(css = "[class='footer-bg']")
     private WebElement footer;
-
-//    @FindBy(xpath = "//*[@class='row clerafix benefits']//div[@class='benefit' and ./div[contains(@class,'benefit-icon')]]")
-//    private List<WebElement> benefitsList;
 
     public void open() {
         System.out.println("_" + Thread.currentThread().getId() + "_");
@@ -105,7 +100,6 @@ public class IndexPage {
     public void checkIFrameLogo() {
         chromeDriver.switchTo().frame(iFrame);
         Assert.assertTrue(epamLogo.isDisplayed());
-        //Assert.assertTrue(chromeDriver.switchTo().frame(chromeDriver.findElement(By.cssSelector("[id='iframe']"))).findElement(By.cssSelector("[id='epam_logo']")).isDisplayed());
     }
 
     public void goToOriginWindow() {

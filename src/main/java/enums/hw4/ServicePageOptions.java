@@ -1,8 +1,5 @@
 package enums.hw4;
 
-import java.util.Arrays;
-import java.util.List;
-
 public enum ServicePageOptions {
 
     //"Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
@@ -22,9 +19,5 @@ public enum ServicePageOptions {
 
     public String getText() {
         return text.toUpperCase();
-    }
-
-    public static List<ServicePageOptions> serviceOptionsList() {
-        return Arrays.asList(ServicePageOptions.values());
     }
 }

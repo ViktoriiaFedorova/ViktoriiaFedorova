@@ -3,15 +3,13 @@ package base.hw4;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.*;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import enums.IndexPageTexts;
 import enums.Users;
-import enums.hw4.ServicePageOptions;
 
 public class IndexPageSelenide {
 
@@ -36,6 +34,9 @@ public class IndexPageSelenide {
     @FindBy(css = "div>ul>li>a[ui='label']")
     private SelenideElement leftNavItemService;
 
+    @FindBy(css = "[class='dropdown-menu'] [href='different-elements.html']")
+    private SelenideElement differentElementsItemInHeader;
+
     public void login(Users user) {
         loginIcon.click();
         userField.setValue(user.getName());
@@ -45,7 +46,6 @@ public class IndexPageSelenide {
 
     public void checkPageTitle(IndexPageTexts pageTitle) {
         Assert.assertEquals(title().toLowerCase(), pageTitle.getText());
-        //Assert.assertEquals(chromeDriver.getTitle().toLowerCase(), pageTitle.getText());
     }
 
     public void checkUserLogIn(Users user) {
@@ -64,4 +64,9 @@ public class IndexPageSelenide {
                 .shouldBe(CollectionCondition.texts(defaultServiceOptions));
     }
 
+    public DifferentElementsPage openDifferentElementsFromHeader() {
+        headerItemService.click();
+        differentElementsItemInHeader.click();
+        return page(DifferentElementsPage.class);
+    }
 }
