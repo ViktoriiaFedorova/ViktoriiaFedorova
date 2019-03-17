@@ -16,6 +16,15 @@ public class DifferentElementsPage {
     @FindBy(css = "[class='label-checkbox']")
     private ElementsCollection checkboxes;
 
+    @FindBy(css = "[class='label-radio']")
+    private ElementsCollection radios;
+
+    @FindBy(css = "select[class='uui-form-element']")
+    private ElementsCollection dropdown;
+
+    @FindBy(css = "[class='uui-button']")
+    private ElementsCollection buttons;
+
     @FindBy(css = "[name='navigation-sidebar']")
     private SelenideElement rightSection;
 
@@ -31,10 +40,10 @@ public class DifferentElementsPage {
 
     //is it needed to check elements' texts here?
     public void checkElements(){
-        $$(By.cssSelector("[class='label-checkbox']")).shouldHaveSize(4);
-        $$(By.cssSelector("[class='label-radio']")).shouldHaveSize(4);
-        $$(By.cssSelector("select[class='uui-form-element']")).shouldHaveSize(1);
-        $$(By.cssSelector("[class='uui-button']")).shouldHaveSize(2);
+        checkboxes.shouldHaveSize(4);
+        radios.shouldHaveSize(4);
+        dropdown.shouldHaveSize(1);
+        buttons.shouldHaveSize(2);
     }
 
     public void checkRightSection(){
@@ -45,13 +54,33 @@ public class DifferentElementsPage {
         leftSection.isDisplayed();
     }
 
-    public void selectCheckboxes(){
-        checkboxes.get(1).click();
-        checkboxes.get(3).click();
+    public void selectCheckboxByName(String checkboxName){
+        SelenideElement checkbox = checkboxes.find(Condition.text(checkboxName)).find("input");
+        checkbox.click();
+        checkbox.shouldBe(Condition.selected);
     }
 
-    public void checkLog(){
-        $$(By.cssSelector("[name='log-sidebar'] div>ul>li")).shouldHaveSize(2);
+    //TODO param
+    public void checkLog(String logRow){
+        log.get(0).shouldHave(Condition.text(logRow));
+    }
+
+    public void selectRadio(){
+        radios.get(4).click();
+    }
+
+    //TODO param
+    public void checkLogForRadios(){
+        $$(By.cssSelector("[name='log-sidebar'] div>ul>li")).shouldHaveSize(1);
+    }
+
+    public void selectDropdownOption(){
+        dropdown.get(4).click();
+    }
+
+    //TODO param
+    public void checkLogForDropdown(){
+        $$(By.cssSelector("[name='log-sidebar'] div>ul>li")).shouldHaveSize(1);
     }
 
 }

@@ -61,17 +61,28 @@ public class TestForServicePage extends SelenideBase {
         differentElementsPage.checkLeftSection();
 
         //step 11: select checkboxes 'Water', 'Wind'
-        differentElementsPage.selectCheckboxes();
+        differentElementsPage.selectCheckboxByName(DifferentElementsTexts.CHECKBOX_WATER.getText());
 
         //step 12: assert there are log rows for each checkbox and values correspond the checkboxes statuses (method should be parametrized)
-        differentElementsPage.checkLog();
+        differentElementsPage.checkLog(DifferentElementsTexts.CHECKBOX_WATER.getText());
 
         //step 13: select radio 'Selen'
+        //differentElementsPage.selectRadio();
+
         //step 14: assert there are log rows for each radio and values correspond the radios statuses (method should be parametrized)
+        //differentElementsPage.checkLogForRadios();
+
         //step 15: select 'Yellow' in dropdown
+        //differentElementsPage.selectDropdownOption();
+
         //step 16: assert there is log row for dropdown and value corresponds the selected value (method should be parametrized)
+        //differentElementsPage.checkLogForDropdown();
+
         //step 17: unselect checkboxes 'Water', 'Wind'
+        //differentElementsPage.unselectCheckboxes();
+
         //step 18: assert there are log rows for each checkbox and values corresponds the checkboxes statuses (method should be parametrized)
+        //differentElementsPage.checkLogForCheckboxes();
 
     }
 
