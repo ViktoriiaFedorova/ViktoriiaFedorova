@@ -1,14 +1,20 @@
 package hw4;
 
-import static com.codeborne.selenide.Selenide.*;
 import base.hw4.DifferentElementsPage;
-import org.testng.annotations.*;
-
 import base.hw4.IndexPageSelenide;
 import base.hw4.SelenideBase;
-import enums.hw4.DifferentElementsTexts;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import enums.IndexPageTexts;
 import enums.Users;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import static base.hw4.DifferentElementsPage.*;
+import static com.codeborne.selenide.Selenide.close;
+import static com.codeborne.selenide.Selenide.open;
+import static enums.hw4.DifferentElementsTexts.*;
 
 public class TestForServicePage extends SelenideBase {
 
@@ -49,7 +55,7 @@ public class TestForServicePage extends SelenideBase {
 
         //step 7: open Service -> Different Elements page from header
         differentElementsPage = indexPageSelenide.openDifferentElementsFromHeader();
-        differentElementsPage.checkDifferentElementsTitle(DifferentElementsTexts.PAGE_TITLE);
+        differentElementsPage.checkDifferentElementsTitle(PAGE_TITLE);
 
         //step 8: check Different Elements page contains 4 checkboxes, 4 radios, 1 dropdown, 2 buttons
         differentElementsPage.checkElements();
@@ -61,28 +67,32 @@ public class TestForServicePage extends SelenideBase {
         differentElementsPage.checkLeftSection();
 
         //step 11: select checkboxes 'Water', 'Wind'
-        differentElementsPage.selectCheckboxByName(DifferentElementsTexts.CHECKBOX_WATER.getText());
+        differentElementsPage.selectElementByName(checkboxes, CHECKBOX_WATER, CHECKBOX_WIND);
 
         //step 12: assert there are log rows for each checkbox and values correspond the checkboxes statuses (method should be parametrized)
-        differentElementsPage.checkLog(DifferentElementsTexts.CHECKBOX_WATER.getText());
+        differentElementsPage.checkLog(checkboxes, CHECKBOX_WATER, true);
+        differentElementsPage.checkLog(checkboxes, CHECKBOX_WIND, true);
 
         //step 13: select radio 'Selen'
-        //differentElementsPage.selectRadio();
+        differentElementsPage.selectElementByName(radios, RADIO_Selen);
 
         //step 14: assert there are log rows for each radio and values correspond the radios statuses (method should be parametrized)
-        //differentElementsPage.checkLogForRadios();
+        differentElementsPage.checkLog(radios, RADIO_Selen, true);
 
         //step 15: select 'Yellow' in dropdown
         //differentElementsPage.selectDropdownOption();
+        differentElementsPage.dropdown.selectOptionContainingText("Yellow");
+        System.out.println("");
 
         //step 16: assert there is log row for dropdown and value corresponds the selected value (method should be parametrized)
         //differentElementsPage.checkLogForDropdown();
 
         //step 17: unselect checkboxes 'Water', 'Wind'
-        //differentElementsPage.unselectCheckboxes();
+        differentElementsPage.selectElementByName(checkboxes, CHECKBOX_WATER, CHECKBOX_WIND);
 
         //step 18: assert there are log rows for each checkbox and values corresponds the checkboxes statuses (method should be parametrized)
-        //differentElementsPage.checkLogForCheckboxes();
+        differentElementsPage.checkLog(checkboxes, CHECKBOX_WATER, false);
+        differentElementsPage.checkLog(checkboxes, CHECKBOX_WIND, false);
 
     }
 
