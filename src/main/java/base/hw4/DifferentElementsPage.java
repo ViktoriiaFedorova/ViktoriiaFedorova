@@ -4,12 +4,10 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.hw4.DifferentElementsTexts;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.title;
 
 public class DifferentElementsPage {
@@ -36,7 +34,7 @@ public class DifferentElementsPage {
     private ElementsCollection log;
 
     public void checkDifferentElementsTitle(DifferentElementsTexts differentElementsTitle) {
-        Assert.assertEquals(title().toUpperCase(), differentElementsTitle.getText());
+        Assert.assertEquals(title().toUpperCase(), differentElementsTitle.getText().toUpperCase());
     }
 
     //is it needed to check elements' texts here?
@@ -70,22 +68,20 @@ public class DifferentElementsPage {
             inputAttribute.shouldNotHave(Condition.checked);
 
         for (SelenideElement aLog : log) {
-            if (aLog.getText().contains(elementName.getText())) {
+            if (aLog.getText().contains(elementName.getText().toUpperCase())) {
                 aLog.shouldHave(text(elementState.toString()));
             }
         }
     }
 
-    //TODO param
-    public void checkLogForDropdown(DifferentElementsTexts elementName, Boolean elementState) {
-
+    public void checkLogForDropdown(SelenideElement element, DifferentElementsTexts elementName, Boolean elementState) {
         if (elementState)
-            inputAttribute.shouldHave(Condition.checked);
+            element.getSelectedOption().shouldHave(text(elementName.getText()));
         else
-            inputAttribute.shouldNotHave(Condition.checked);
+            element.getSelectedOption().shouldHave(text(elementName.getText()));
 
         for (SelenideElement aLog : log) {
-            if (aLog.getText().contains(elementName.getText())) {
+            if (aLog.getText().contains(elementName.getText().toUpperCase())) {
                 aLog.shouldHave(text(elementState.toString()));
             }
         }

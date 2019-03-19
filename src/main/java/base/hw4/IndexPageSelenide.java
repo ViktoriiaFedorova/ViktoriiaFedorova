@@ -1,15 +1,15 @@
 package base.hw4;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import static com.codeborne.selenide.Selenide.*;
-
-import org.openqa.selenium.By;
+import enums.IndexPageTexts;
+import enums.Users;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
-import enums.IndexPageTexts;
-import enums.Users;
+import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.title;
 
 public class IndexPageSelenide {
 
@@ -29,13 +29,22 @@ public class IndexPageSelenide {
     private SelenideElement userName;
 
     @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8'] [class='dropdown-toggle']")
-    private SelenideElement headerItemService;
+    private SelenideElement serviceInHeader;
+
+    @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8'] [class='dropdown-menu'] > li")
+    private ElementsCollection serviceOptionsInHeader;
 
     @FindBy(css = "div>ul>li>a[ui='label']")
-    private SelenideElement leftNavItemService;
+    private SelenideElement serviceInLeftNav;
+
+    @FindBy(css = "div>ul>li>ul[class='sub'] > li")
+    private ElementsCollection serviceOptionsInLeftNav;
 
     @FindBy(css = "[class='dropdown-menu'] [href='different-elements.html']")
     private SelenideElement differentElementsItemInHeader;
+
+    @FindBy(css = "[class='dropdown-menu'] [href='dates.html']")
+    private SelenideElement datesInHeader;
 
     public void login(Users user) {
         loginIcon.click();
@@ -53,20 +62,26 @@ public class IndexPageSelenide {
     }
 
     public void checkServiceDropdownOptionsFromHeader (String[] defaultServiceOptions){
-        headerItemService.click();
-        $$(By.cssSelector("[class='uui-navigation nav navbar-nav m-l8'] [class='dropdown-menu'] > li"))
-                    .shouldBe(CollectionCondition.texts(defaultServiceOptions));
+        serviceInHeader.click();
+        serviceOptionsInHeader.shouldBe(CollectionCondition.texts(defaultServiceOptions));
     }
 
     public void checkServiceDropdownOptionsFromLeftNav (String[] defaultServiceOptions){
-        leftNavItemService.click();
-        $$(By.cssSelector("div>ul>li>ul[class='sub'] > li"))
-                .shouldBe(CollectionCondition.texts(defaultServiceOptions));
+        serviceInLeftNav.click();
+        serviceOptionsInLeftNav.shouldBe(CollectionCondition.texts(defaultServiceOptions));
     }
 
     public DifferentElementsPage openDifferentElementsFromHeader() {
-        headerItemService.click();
+        if(!serviceOptionsInHeader.get(0).isDisplayed())
+            serviceInHeader.click();
         differentElementsItemInHeader.click();
         return page(DifferentElementsPage.class);
+    }
+
+    public DatesPage openDatesPagefromHeader(){
+        if(!serviceOptionsInHeader.get(0).isDisplayed())
+            serviceInHeader.click();
+        datesInHeader.click();
+        return page(DatesPage.class);
     }
 }

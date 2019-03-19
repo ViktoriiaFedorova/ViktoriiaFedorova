@@ -9,7 +9,7 @@ public enum DifferentElementsTexts {
     CHECKBOX_FIRE("Fire"),
     RADIO_Gold("Gold"),
     RADIO_Silver("Silver"),
-    RADIO_Bronse("Bronse"),
+    RADIO_Bronze("Bronze"),
     RADIO_Selen("Selen"),
     COLOR_Red("Red"),
     COLOR_Green("Green"),
@@ -23,6 +23,6 @@ public enum DifferentElementsTexts {
     }
 
     public String getText() {
-        return text.toUpperCase();
+        return text;
     }
 }

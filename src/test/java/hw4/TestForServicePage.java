@@ -3,23 +3,26 @@ package hw4;
 import base.hw4.DifferentElementsPage;
 import base.hw4.IndexPageSelenide;
 import base.hw4.SelenideBase;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.AssertionMode;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.testng.SoftAsserts;
 import enums.IndexPageTexts;
 import enums.Users;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import enums.hw4.ServicePageOptions;
+import org.testng.annotations.*;
 
-import static base.hw4.DifferentElementsPage.*;
+import java.util.Arrays;
+
+import static base.hw4.DifferentElementsPage.checkboxes;
+import static base.hw4.DifferentElementsPage.radios;
 import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.open;
 import static enums.hw4.DifferentElementsTexts.*;
 
+@Listeners({SoftAsserts.class})
 public class TestForServicePage extends SelenideBase {
 
     private IndexPageSelenide indexPageSelenide;
-    private DifferentElementsPage differentElementsPage;
 
     //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
@@ -36,6 +39,10 @@ public class TestForServicePage extends SelenideBase {
     @Test
     public void testForServicePage(){
 
+        Configuration.assertionMode = AssertionMode.SOFT;
+
+        DifferentElementsPage differentElementsPage;
+
         //step 2: assert browser title
         indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
 
@@ -46,12 +53,12 @@ public class TestForServicePage extends SelenideBase {
         indexPageSelenide.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: click on 'Service' in the header and check dropdown contains options "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
-        //indexPageSelenide.checkServiceDropdownOptionsFromHeader
-               //(Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
+        indexPageSelenide.checkServiceDropdownOptionsFromHeader
+               (Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
 
         //step 6: click on 'Service' in the left section and check dropdown contains options "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
-        //indexPageSelenide.checkServiceDropdownOptionsFromLeftNav
-               //(Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
+        indexPageSelenide.checkServiceDropdownOptionsFromLeftNav
+               (Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
 
         //step 7: open Service -> Different Elements page from header
         differentElementsPage = indexPageSelenide.openDifferentElementsFromHeader();
@@ -82,10 +89,9 @@ public class TestForServicePage extends SelenideBase {
         //step 15: select 'Yellow' in dropdown
         //differentElementsPage.selectDropdownOption();
         differentElementsPage.dropdown.selectOptionContainingText("Yellow");
-        System.out.println("");
 
         //step 16: assert there is log row for dropdown and value corresponds the selected value (method should be parametrized)
-        //differentElementsPage.checkLogForDropdown();
+        differentElementsPage.checkLogForDropdown(differentElementsPage.dropdown, COLOR_Yellow, true);
 
         //step 17: unselect checkboxes 'Water', 'Wind'
         differentElementsPage.selectElementByName(checkboxes, CHECKBOX_WATER, CHECKBOX_WIND);
