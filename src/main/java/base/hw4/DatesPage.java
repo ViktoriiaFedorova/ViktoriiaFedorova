@@ -2,11 +2,9 @@ package base.hw4;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class DatesPage {
 
@@ -22,7 +20,14 @@ public class DatesPage {
 //        executeJavaScript(“document.getElementById(‘Similarity’).style.display = ‘inline’;”);
 //        $("#Similarity").val(“0.7”);
 
-        sliderHandles.get(0).shouldHave(Condition.text());
-        sliderHandles.get(1).setValue("100");
+        //sliderHandles.get(0).shouldHave(Condition.text("0"));
+        //sliderHandles.get(1).setValue("100");
+
+        //632(570) and 880 248
+        int i = (int) (2 * 3.1);
+        int delta = i - i/30;
+        Selenide.actions().clickAndHold(sliderHandles.get(0)).moveByOffset(delta,0).release().build().perform();
+        System.out.println();
+
     }
 }
