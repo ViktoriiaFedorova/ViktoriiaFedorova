@@ -29,7 +29,7 @@ public class TestForSlidersOnDatesPage extends SelenideBase {
     }
 
     @Test
-    public void testForServicePage(){
+    public void testForSlidersOnDatesPages(){
 
         DatesPage datesPage;
 
