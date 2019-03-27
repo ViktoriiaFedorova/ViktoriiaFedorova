@@ -70,26 +70,17 @@ public class TestForSlidersOnDatesPage extends SelenideBase {
         datesPage.setSliderHandleToPosition(rightSliderHandle, 100);
         datesPage.setSliderHandleToPosition(leftSliderHandle, 100);
 
-        System.out.println("log1");
-
         //step 11: assert there are log rows for 'From' and 'To' sliders with corresponding values (method should be parametrized)
         datesPage.checkLogForSliderHandlePosition(rightSliderHandle, 100);
         datesPage.checkLogForSliderHandlePosition(leftSliderHandle, 100);
-
-        System.out.println("log2");
 
         //step 12: set Range sliders: left is 30, right is 70
         datesPage.setSliderHandleToPosition(leftSliderHandle, 30);
         datesPage.setSliderHandleToPosition(rightSliderHandle, 70);
 
-        System.out.println("log3");
-
         //step 13: assert there are log rows for 'From' and 'To' sliders with corresponding values (method should be parametrized)
         datesPage.checkLogForSliderHandlePosition(leftSliderHandle, 30);
         datesPage.checkLogForSliderHandlePosition(rightSliderHandle, 70);
-
-        System.out.println("log");
-
     }
 
 }

@@ -25,7 +25,6 @@ public class DatesPage {
 
         int offset = slider.getSize().width * (position - Integer.valueOf(sliderHandle.lastChild().getText())) / 100 - 1;
         Selenide.actions().clickAndHold(sliderHandle).moveByOffset(offset, 0).release().build().perform();
-
     }
 
     public void checkLogForSliderHandlePosition(SelenideElement sliderHandle, int position) {
@@ -38,12 +37,9 @@ public class DatesPage {
 
         for (SelenideElement logRecord : log) {
             if (logRecord.getText().contains(nameForLog)) {
-                logRecord.should(text(Integer.valueOf(position).toString()));
+                logRecord.shouldHave(text(Integer.valueOf(position).toString()));
                 break;
-                //System.out.println("log checked");
             }
         }
-
-        //System.out.println("log method");
     }
 }
