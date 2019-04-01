@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite For Jenkins">
+    <test name="Test Set For Jenkins">
+
+        <packages>
+            <package name="hw5"/>
+        </packages>
+
+        <!--clean test -Dsurefire.suiteXmlFiles=src/test/resources/test123.xml allure:report-->
+
+    </test>
+</suite>

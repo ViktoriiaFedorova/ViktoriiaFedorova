@@ -6,10 +6,11 @@ import com.codeborne.selenide.SelenideElement;
 import enums.IndexPageTexts;
 import enums.Users;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.Selenide.title;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class IndexPageSelenide {
 
@@ -54,11 +55,11 @@ public class IndexPageSelenide {
     }
 
     public void checkPageTitle(IndexPageTexts pageTitle) {
-        Assert.assertEquals(title().toLowerCase(), pageTitle.getText());
+        assertThat(title().toLowerCase(), is(pageTitle.getText()));
     }
 
     public void checkUserLogIn(Users user) {
-        Assert.assertEquals(userName.getText(), user.getUserName());
+        assertThat(userName.getText(), is(user.getUserName()));
     }
 
     public void checkServiceDropdownOptionsFromHeader (String[] defaultServiceOptions){

@@ -5,10 +5,11 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.hw4.DifferentElementsTexts;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.title;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 public class DifferentElementsPage {
 
@@ -34,7 +35,7 @@ public class DifferentElementsPage {
     private ElementsCollection log;
 
     public void checkDifferentElementsTitle(DifferentElementsTexts differentElementsTitle) {
-        Assert.assertEquals(title().toUpperCase(), differentElementsTitle.getText().toUpperCase());
+        assertThat(title().toUpperCase(), is(differentElementsTitle.getText().toUpperCase()));
     }
 
     //is it needed to check elements' texts here?
