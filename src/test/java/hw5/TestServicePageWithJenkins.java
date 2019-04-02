@@ -9,6 +9,7 @@ import com.codeborne.selenide.testng.SoftAsserts;
 import enums.IndexPageTexts;
 import enums.Users;
 import enums.hw4.ServicePageOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -30,6 +31,15 @@ public class TestServicePageWithJenkins extends SelenideBase {
     //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
     public void initTest(){
+       if(System.getProperty("remote").equals("true")) {
+            DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+            desiredCapabilities.setBrowserName("chrome");
+            desiredCapabilities.setVersion("73");
+            desiredCapabilities.setCapability("enableVideo", true);
+            Configuration.startMaximized = true;
+            Configuration.remote = "http://192.168.1.72:4444/wd/hub"; //local selenoid
+            Configuration.browserCapabilities = desiredCapabilities;
+        }
         indexPageSelenide = open("https://epam.github.io/JDI/index.html", IndexPageSelenide.class);
     }
 
