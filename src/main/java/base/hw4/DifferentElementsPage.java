@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.hw4.DifferentElementsTexts;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.text;
@@ -34,11 +35,13 @@ public class DifferentElementsPage {
     @FindBy(css = "[name='log-sidebar'] div>ul[class='panel-body-list logs']>li")
     private ElementsCollection log;
 
+    @Step("Displayed page title should be <{differentElementsTitle.text}>")
     public void checkDifferentElementsTitle(DifferentElementsTexts differentElementsTitle) {
         assertThat(title().toUpperCase(), is(differentElementsTitle.getText().toUpperCase()));
     }
 
     //is it needed to check elements' texts here?
+    @Step("There are the following elements on Different Elements page: 4 checkboxes, 4 radios, 1 dropdown, 2 buttons")
     public void checkElements() {
         checkboxes.shouldHaveSize(4);
         radios.shouldHaveSize(4);
@@ -46,14 +49,17 @@ public class DifferentElementsPage {
         buttons.shouldHaveSize(2);
     }
 
+    @Step("There is right section on Different Elements page")
     public void checkRightSection() {
         rightSection.isDisplayed();
     }
 
+    @Step("There is left section on Different Elements page")
     public void checkLeftSection() {
         leftSection.isDisplayed();
     }
 
+    @Step("Click the following elements: <{elementsNames}>")
     public void selectElementByName(ElementsCollection elements, DifferentElementsTexts... elementsNames) {
         for (DifferentElementsTexts checkboxName : elementsNames) {
             SelenideElement inputAttribute = elements.find(text(checkboxName.getText())).find("input");
@@ -61,6 +67,7 @@ public class DifferentElementsPage {
         }
     }
 
+    @Step("There is a record in log for <{elementName}> = <{elementState}>")
     public void checkLog(ElementsCollection elements, DifferentElementsTexts elementName, Boolean elementState) {
         SelenideElement inputAttribute = elements.find(text(elementName.getText())).find("input");
         if (elementState)
@@ -75,6 +82,7 @@ public class DifferentElementsPage {
         }
     }
 
+    @Step("There is a record in log for <{elementName}> = <{elementState}>")
     public void checkLogForDropdown(SelenideElement element, DifferentElementsTexts elementName, Boolean elementState) {
         if (elementState)
             element.getSelectedOption().shouldHave(text(elementName.getText()));

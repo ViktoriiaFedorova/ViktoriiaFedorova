@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.IndexPageTexts;
 import enums.Users;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.page;
@@ -47,6 +48,7 @@ public class IndexPageSelenide {
     @FindBy(css = "[class='dropdown-menu'] [href='dates.html']")
     private SelenideElement datesInHeader;
 
+    @Step("Login with login: <{user.name}> and password: <{user.password}>")
     public void login(Users user) {
         loginIcon.click();
         userField.setValue(user.getName());
@@ -54,24 +56,29 @@ public class IndexPageSelenide {
         submitButton.click();
     }
 
+    @Step("Displayed page title should be <{pageTitle.text}>")
     public void checkPageTitle(IndexPageTexts pageTitle) {
         assertThat(title().toLowerCase(), is(pageTitle.getText()));
     }
 
+    @Step("User <{user}> is logged in")
     public void checkUserLogIn(Users user) {
         assertThat(userName.getText(), is(user.getUserName()));
     }
 
+    @Step("There are following options under Service menu in header: <{defaultServiceOptions}>")
     public void checkServiceDropdownOptionsFromHeader (String[] defaultServiceOptions){
         serviceInHeader.click();
         serviceOptionsInHeader.shouldBe(CollectionCondition.texts(defaultServiceOptions));
     }
 
+    @Step("There are following options under Service menu in left navigation: <{defaultServiceOptions}>")
     public void checkServiceDropdownOptionsFromLeftNav (String[] defaultServiceOptions){
         serviceInLeftNav.click();
         serviceOptionsInLeftNav.shouldBe(CollectionCondition.texts(defaultServiceOptions));
     }
 
+    @Step("Open Different Elements page via the option under Service in header")
     public DifferentElementsPage openDifferentElementsFromHeader() {
         if(!serviceOptionsInHeader.get(0).isDisplayed())
             serviceInHeader.click();
@@ -79,7 +86,7 @@ public class IndexPageSelenide {
         return page(DifferentElementsPage.class);
     }
 
-    public DatesPage openDatesPagefromHeader(){
+    public DatesPage openDatesPageFromHeader(){
         if(!serviceOptionsInHeader.get(0).isDisplayed())
             serviceInHeader.click();
         datesInHeader.click();

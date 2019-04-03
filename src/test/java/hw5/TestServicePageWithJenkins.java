@@ -3,12 +3,16 @@ package hw5;
 import base.hw4.DifferentElementsPage;
 import base.hw4.IndexPageSelenide;
 import base.hw4.SelenideBase;
+import base.hw5.AllureListener;
 import com.codeborne.selenide.AssertionMode;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.selenide.testng.SoftAsserts;
 import enums.IndexPageTexts;
 import enums.Users;
 import enums.hw4.ServicePageOptions;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -30,8 +34,10 @@ public class TestServicePageWithJenkins extends SelenideBase {
 
     //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
-    public void initTest(){
-       if(System.getProperty("remote").equals("true")) {
+    public void initTest() {
+        SelenideLogger.addListener("AllureSelenideListener", new AllureListener());
+
+        if (System.getProperty("remote").equals("true")) {
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setBrowserName("chrome");
             desiredCapabilities.setVersion("73");
@@ -40,17 +46,21 @@ public class TestServicePageWithJenkins extends SelenideBase {
             Configuration.remote = "http://192.168.1.72:4444/wd/hub"; //local selenoid
             Configuration.browserCapabilities = desiredCapabilities;
         }
+
         indexPageSelenide = open("https://epam.github.io/JDI/index.html", IndexPageSelenide.class);
     }
 
     @AfterMethod
     //close browser
-    public void finishTest(){
+    public void finishTest() {
         close();
     }
 
+    @Feature("Service Page")
+    @Story("Configure different elements on the Service Page")
+
     @Test
-    public void testServicePageWithJenkins(){
+    public void testServicePageWithJenkins() {
 
         Configuration.assertionMode = AssertionMode.SOFT;
 
@@ -67,11 +77,11 @@ public class TestServicePageWithJenkins extends SelenideBase {
 
         //step 5: click on 'Service' in the header and check dropdown contains options "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
         indexPageSelenide.checkServiceDropdownOptionsFromHeader
-               (Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
+                (Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
 
         //step 6: click on 'Service' in the left section and check dropdown contains options "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"
         indexPageSelenide.checkServiceDropdownOptionsFromLeftNav
-               (Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
+                (Arrays.stream(ServicePageOptions.values()).map(ServicePageOptions::getText).toArray(String[]::new));
 
         //step 7: open Service -> Different Elements page from header
         differentElementsPage = indexPageSelenide.openDifferentElementsFromHeader();
@@ -111,7 +121,18 @@ public class TestServicePageWithJenkins extends SelenideBase {
         //step 18: assert there are log rows for each checkbox and values corresponds the checkboxes statuses (method should be parametrized)
         differentElementsPage.checkLog(checkboxes, CHECKBOX_WATER, false);
         differentElementsPage.checkLog(checkboxes, CHECKBOX_WIND, false);
+    }
 
+    @Test
+    public void firstTestForThreads(){
+
+        indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
+    }
+
+    @Test
+    public void secondTestForThreads(){
+
+        indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
     }
 
 }

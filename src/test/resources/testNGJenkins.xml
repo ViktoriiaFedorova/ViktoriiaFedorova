@@ -1,13 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite For Jenkins">
-    <test name="Test Set For Jenkins">
+    <test name="Test Set For Jenkins" parallel="methods" thread-count="3">
 
         <packages>
             <package name="hw5"/>
         </packages>
 
-        <!--clean test -Dsurefire.suiteXmlFiles=src/test/resources/test123.xml allure:report-->
+        <!--clean test -Dsurefire.suiteXmlFiles=src/test/resources/testNGJenkins.xml allure:report-->
 
     </test>
 </suite>

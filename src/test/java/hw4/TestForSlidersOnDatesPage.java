@@ -3,6 +3,8 @@ package hw4;
 import base.hw4.DatesPage;
 import base.hw4.IndexPageSelenide;
 import base.hw4.SelenideBase;
+import com.codeborne.selenide.AssertionMode;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.testng.SoftAsserts;
 import enums.IndexPageTexts;
 import enums.Users;
@@ -36,6 +38,8 @@ public class TestForSlidersOnDatesPage extends SelenideBase {
     @Test
     public void testForSlidersOnDatesPages(){
 
+        Configuration.assertionMode = AssertionMode.SOFT;
+
         DatesPage datesPage;
 
         //step 2: assert browser title
@@ -48,7 +52,7 @@ public class TestForSlidersOnDatesPage extends SelenideBase {
         indexPageSelenide.checkUserLogIn(Users.PITERCHAILOVSKII);
 
         //step 5: open Service -> Dates page from header
-        datesPage = indexPageSelenide.openDatesPagefromHeader();
+        datesPage = indexPageSelenide.openDatesPageFromHeader();
 
         //step 6: set Range sliders: left is on the most left position, right - the most right position
         datesPage.setSliderHandleToPosition(leftSliderHandle, 0);
