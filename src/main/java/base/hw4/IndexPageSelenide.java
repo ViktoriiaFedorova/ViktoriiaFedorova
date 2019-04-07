@@ -1,6 +1,7 @@
 package base.hw4;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.IndexPageTexts;
@@ -50,7 +51,7 @@ public class IndexPageSelenide {
 
     @Step("Login with login: <{user.name}> and password: <{user.password}>")
     public void login(Users user) {
-        loginIcon.click();
+        loginIcon.waitUntil(Condition.visible, 15000).click();
         userField.setValue(user.getName());
         passwordField.setValue(user.getPassword());
         submitButton.click();

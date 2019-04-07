@@ -12,7 +12,6 @@ public abstract class SelenideBase {
         Configuration.browser = Browsers.CHROME;
         Configuration.timeout = 5000;
         Configuration.pollingInterval = 300;
-        Configuration.startMaximized = true;
         Configuration.screenshots = false;
     }
 }

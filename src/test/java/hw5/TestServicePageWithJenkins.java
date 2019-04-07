@@ -6,6 +6,7 @@ import base.hw4.SelenideBase;
 import base.hw5.AllureListener;
 import com.codeborne.selenide.AssertionMode;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.selenide.testng.SoftAsserts;
 import enums.IndexPageTexts;
@@ -14,6 +15,7 @@ import enums.hw4.ServicePageOptions;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -23,7 +25,6 @@ import java.util.Arrays;
 
 import static base.hw4.DifferentElementsPage.checkboxes;
 import static base.hw4.DifferentElementsPage.radios;
-import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.open;
 import static enums.hw4.DifferentElementsTexts.*;
 
@@ -41,20 +42,21 @@ public class TestServicePageWithJenkins extends SelenideBase {
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setBrowserName("chrome");
             desiredCapabilities.setVersion("73");
+            desiredCapabilities.setCapability("screenResolution", "1920x1080x24");
             desiredCapabilities.setCapability("enableVNC", true);
             desiredCapabilities.setCapability("enableVideo", true);
-            Configuration.startMaximized = true;
+//            Configuration.startMaximized = true;
             Configuration.remote = "http://192.168.1.72:4444/wd/hub"; //local selenoid
             Configuration.browserCapabilities = desiredCapabilities;
         }
 
         indexPageSelenide = open("https://epam.github.io/JDI/index.html", IndexPageSelenide.class);
+
     }
 
     @AfterMethod
     //close browser
     public void finishTest() {
-        close();
     }
 
     @Feature("Service Page")
@@ -62,7 +64,6 @@ public class TestServicePageWithJenkins extends SelenideBase {
 
     @Test
     public void testServicePageWithJenkins() {
-
         Configuration.assertionMode = AssertionMode.SOFT;
 
         DifferentElementsPage differentElementsPage;
@@ -128,7 +129,6 @@ public class TestServicePageWithJenkins extends SelenideBase {
     @Story("Configure different elements on the Service Page")
     @Test
     public void firstTestForThreads(){
-
         indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
     }
 
@@ -136,7 +136,7 @@ public class TestServicePageWithJenkins extends SelenideBase {
     @Story("Configure different elements on the Service Page")
     @Test
     public void secondTestForThreads(){
-
+        System.out.println("secondTestForThreads" +  ((RemoteWebDriver) WebDriverRunner.getWebDriver()).getSessionId());
         indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
     }
 
