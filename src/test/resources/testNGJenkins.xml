@@ -8,6 +8,7 @@
         </packages>
 
         <!--clean test -Dremote=true -Dsurefire.suiteXmlFiles=src/test/resources/testNGJenkins.xml allure:report-->
+        <!--docker run -name jenkins2 -d -v ~/Downloads/jenkins_home:/var/jenkins_home -p 8082:8080 -p 50001:50000 jenkins/jenkins:lts-->
 
     </test>
 </suite>

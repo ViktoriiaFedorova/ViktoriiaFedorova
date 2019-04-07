@@ -13,5 +13,6 @@ public abstract class SelenideBase {
         Configuration.timeout = 5000;
         Configuration.pollingInterval = 300;
         Configuration.screenshots = false;
+        Configuration.startMaximized = true;
     }
 }
