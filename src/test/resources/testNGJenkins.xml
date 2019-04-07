@@ -7,7 +7,7 @@
             <package name="hw5"/>
         </packages>
 
-        <!--clean test -Dsurefire.suiteXmlFiles=src/test/resources/testNGJenkins.xml allure:report-->
+        <!--clean test -Dremote=true -Dsurefire.suiteXmlFiles=src/test/resources/testNGJenkins.xml allure:report-->
 
     </test>
 </suite>

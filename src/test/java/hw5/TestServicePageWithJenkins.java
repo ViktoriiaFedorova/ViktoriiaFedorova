@@ -41,6 +41,7 @@ public class TestServicePageWithJenkins extends SelenideBase {
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setBrowserName("chrome");
             desiredCapabilities.setVersion("73");
+            desiredCapabilities.setCapability("enableVNC", true);
             desiredCapabilities.setCapability("enableVideo", true);
             Configuration.startMaximized = true;
             Configuration.remote = "http://192.168.1.72:4444/wd/hub"; //local selenoid
