@@ -124,12 +124,16 @@ public class TestServicePageWithJenkins extends SelenideBase {
         differentElementsPage.checkLog(checkboxes, CHECKBOX_WIND, false);
     }
 
+    @Feature("Service Page")
+    @Story("Configure different elements on the Service Page")
     @Test
     public void firstTestForThreads(){
 
         indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
     }
 
+    @Feature("Service Page")
+    @Story("Configure different elements on the Service Page")
     @Test
     public void secondTestForThreads(){
 
