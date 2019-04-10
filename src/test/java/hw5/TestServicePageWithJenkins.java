@@ -36,15 +36,16 @@ public class TestServicePageWithJenkins extends SelenideBase {
     @BeforeMethod
     public void initTest() {
         SelenideLogger.addListener("AllureSelenideListener", new AllureListener());
+        String url = System.getProperty("remoteUr");
 
-        if (System.getProperty("remote").equals("true")) {
+        if (!url.isEmpty()) {
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setBrowserName("chrome");
             desiredCapabilities.setCapability("enableVNC", true);
             desiredCapabilities.setVersion("73");
             desiredCapabilities.setCapability("screenResolution", "1920x1080x24");
 //            Configuration.remote = "http://192.168.1.72:4444/wd/hub"; //local selenoid
-            Configuration.remote = "http://192.168.99.101:4444/wd/hub"; //local selenoid
+            Configuration.remote = "http://" + url + ":4444/wd/hub"; //local selenoid
             Configuration.browserCapabilities = desiredCapabilities;
         }
 

@@ -3,11 +3,10 @@ package base.hw4;
 import com.codeborne.selenide.Browsers;
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 
 public abstract class SelenideBase {
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeSuite() {
 
         Configuration.browser = Browsers.CHROME;
