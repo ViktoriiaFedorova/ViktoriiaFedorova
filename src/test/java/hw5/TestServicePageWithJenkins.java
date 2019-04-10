@@ -14,7 +14,6 @@ import enums.hw4.ServicePageOptions;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -36,7 +35,7 @@ public class TestServicePageWithJenkins extends SelenideBase {
     @BeforeMethod
     public void initTest() {
         SelenideLogger.addListener("AllureSelenideListener", new AllureListener());
-        String url = System.getProperty("remoteUr");
+        String url = System.getProperty("remoteUrl");
 
         if (!url.isEmpty()) {
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
