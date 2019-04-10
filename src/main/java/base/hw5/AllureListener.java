@@ -10,6 +10,7 @@ import io.qameta.allure.model.StatusDetails;
 import io.qameta.allure.util.ResultsUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;

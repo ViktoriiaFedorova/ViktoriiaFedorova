@@ -5,6 +5,7 @@ import base.hw4.IndexPageSelenide;
 import base.hw4.SelenideBase;
 import base.hw5.AllureListener;
 import com.codeborne.selenide.AssertionMode;
+import com.codeborne.selenide.Browsers;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.selenide.testng.SoftAsserts;
@@ -34,6 +35,12 @@ public class TestServicePageWithJenkins extends SelenideBase {
     //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
     public void initTest() {
+        System.out.println("beforeSuite");
+        Configuration.browser = Browsers.CHROME;
+        Configuration.timeout = 5000;
+        Configuration.pollingInterval = 300;
+        Configuration.screenshots = false;
+        Configuration.startMaximized = true;
         SelenideLogger.addListener("AllureSelenideListener", new AllureListener());
         String url = System.getProperty("remoteUrl");
 

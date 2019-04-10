@@ -1,12 +1,10 @@
 package base.hw4;
 
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
 import enums.IndexPageTexts;
 import enums.Users;
 import io.qameta.allure.Step;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.page;
@@ -64,7 +62,7 @@ public class IndexPageSelenide {
 
     @Step("User <{user}> is logged in")
     public void checkUserLogIn(Users user) {
-        assertThat(userName.getText(), is(user.getUserName()));
+        userName.should(Condition.text(user.getUserName()));
     }
 
     @Step("There are following options under Service menu in header: <{defaultServiceOptions}>")
