@@ -9,7 +9,6 @@ public abstract class SelenideBase {
 
 //    @BeforeMethod
     public void beforeSuite() {
-//        System.out.println("beforeSuite");
 //        Configuration.browser = Browsers.CHROME;
 //        Configuration.timeout = 30000;
 //        Configuration.pollingInterval = 300;

@@ -35,7 +35,6 @@ public class TestServicePageWithJenkins extends SelenideBase {
     //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
     public void initTest() {
-        System.out.println("beforeSuite");
         Configuration.browser = Browsers.CHROME;
         Configuration.timeout = 5000;
         Configuration.pollingInterval = 300;
