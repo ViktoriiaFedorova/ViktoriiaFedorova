@@ -14,6 +14,7 @@ import enums.Users;
 import enums.hw4.ServicePageOptions;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -34,6 +35,15 @@ public class TestServicePageWithJenkins {
     //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
     public void initTest() {
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments(
+                "--headless",
+                "--whitelisted-ips",
+                "--no-sandbox",
+                "--disable-extensions");
+
+
         Configuration.browser = Browsers.CHROME;
         Configuration.timeout = 5000;
         Configuration.pollingInterval = 300;
@@ -48,6 +58,7 @@ public class TestServicePageWithJenkins {
             desiredCapabilities.setCapability("enableVNC", true);
             desiredCapabilities.setVersion("73");
             desiredCapabilities.setCapability("screenResolution", "1920x1080x24");
+            desiredCapabilities.merge(options);
 //            Configuration.remote = "http://192.168.1.72:4444/wd/hub"; //local selenoid
             Configuration.remote = "http://" + url + ":4444/wd/hub"; //local selenoid
             Configuration.browserCapabilities = desiredCapabilities;
@@ -126,14 +137,14 @@ public class TestServicePageWithJenkins {
     @Feature("Service Page")
     @Story("Configure different elements on the Service Page")
     @Test
-    public void firstTestForThreads(){
+    public void firstTestForThreads() {
         indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
     }
 
     @Feature("Service Page")
     @Story("Configure different elements on the Service Page")
     @Test
-    public void secondTestForThreads(){
+    public void secondTestForThreads() {
         indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
     }
 
