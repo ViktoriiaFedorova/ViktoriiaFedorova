@@ -27,7 +27,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static enums.hw4.DifferentElementsTexts.*;
 
 @Listeners({SoftAsserts.class})
-public class TestServicePageWithJenkins extends SelenideBase {
+public class TestServicePageWithJenkins {
 
     private IndexPageSelenide indexPageSelenide;
 
