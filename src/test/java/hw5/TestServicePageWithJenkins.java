@@ -31,7 +31,6 @@ public class TestServicePageWithJenkins {
 
     private IndexPageSelenide indexPageSelenide;
 
-
     //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
     public void initTest() {
