@@ -6,12 +6,12 @@ import org.testng.annotations.BeforeMethod;
 
 public abstract class SelenideBase {
 
-    @BeforeMethod
+//    @BeforeMethod
     public void beforeSuite() {
-        Configuration.browser = Browsers.CHROME;
-        Configuration.timeout = 30000;
-        Configuration.pollingInterval = 300;
-        Configuration.screenshots = false;
-        Configuration.startMaximized = true;
+//        Configuration.browser = Browsers.CHROME;
+//        Configuration.timeout = 30000;
+//        Configuration.pollingInterval = 300;
+//        Configuration.screenshots = false;
+//        Configuration.startMaximized = true;
     }
 }
