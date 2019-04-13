@@ -47,11 +47,15 @@ public class AllureListener implements LogEventListener {
     }
 
     private static byte[] getScreenshotBytes() {
-        return ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES);
+        return WebDriverRunner.hasWebDriverStarted() ?
+                ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES)
+                : new byte[0];
     }
 
     private static byte[] getPageSourceBytes() {
-        return WebDriverRunner.getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8);
+        return WebDriverRunner.hasWebDriverStarted() ?
+                ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES)
+                : new byte[0];
     }
 
 }

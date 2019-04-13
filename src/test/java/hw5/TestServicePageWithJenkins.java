@@ -58,6 +58,7 @@ public class TestServicePageWithJenkins {
             desiredCapabilities.setCapability("enableVNC", true);
             desiredCapabilities.setVersion("73");
             desiredCapabilities.setCapability("screenResolution", "1920x1080x24");
+            desiredCapabilities.setCapability("enableVideo", true);
             desiredCapabilities.merge(options);
 //            Configuration.remote = "http://192.168.1.72:4444/wd/hub"; //local selenoid
             Configuration.remote = "http://" + url + ":4444/wd/hub"; //local selenoid
