@@ -115,6 +115,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M3</version>
                 <configuration>
+                    <parallel>classes</parallel>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.8.12/aspectjweaver-1.8.12.jar"
