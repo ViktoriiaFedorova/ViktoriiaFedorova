@@ -74,8 +74,8 @@ public class TestServicePageWithJenkins {
 
     @Test
     public void testServicePageWithJenkins() {
-        Configuration.assertionMode = AssertionMode.SOFT;
 
+        Configuration.assertionMode = AssertionMode.SOFT;
         DifferentElementsPage differentElementsPage;
 
         //step 2: assert browser title
