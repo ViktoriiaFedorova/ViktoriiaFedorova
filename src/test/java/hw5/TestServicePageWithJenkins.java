@@ -29,7 +29,6 @@ public class TestServicePageWithJenkins {
 
     private IndexPageSelenide indexPageSelenide;
 
-    //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
     public synchronized void initTest(Method method) {
         SelenideLogger.addListener("AllureSelenideListener", new AllureListener());
@@ -62,9 +61,11 @@ public class TestServicePageWithJenkins {
     @Story("Configure different elements on the Service Page")
     @Test
     public void testServicePageWithJenkins() {
-        Configuration.assertionMode = AssertionMode.SOFT;
 
+        Configuration.assertionMode = AssertionMode.SOFT;
         DifferentElementsPage differentElementsPage;
+
+        //step 1: open test site by URL https://epam.github.io/JDI/
         indexPageSelenide = open("https://epam.github.io/JDI/index.html", IndexPageSelenide.class);
 
         //step 2: assert browser title
