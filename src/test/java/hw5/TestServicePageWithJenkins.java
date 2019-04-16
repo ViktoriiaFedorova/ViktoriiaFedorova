@@ -3,9 +3,7 @@ package hw5;
 import base.hw4.DifferentElementsPage;
 import base.hw4.IndexPageSelenide;
 import base.hw5.AllureListener;
-import com.codeborne.selenide.AssertionMode;
-import com.codeborne.selenide.Browsers;
-import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.selenide.testng.SoftAsserts;
 import enums.IndexPageTexts;
@@ -13,12 +11,12 @@ import enums.Users;
 import enums.hw4.ServicePageOptions;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import static base.hw4.DifferentElementsPage.checkboxes;
@@ -33,35 +31,30 @@ public class TestServicePageWithJenkins {
 
     //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
-    public synchronized void initTest() {
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments(
-                "--headless",
-                "--whitelisted-ips",
-                "--no-sandbox",
-                "--disable-extensions");
-
-
-        Configuration.browser = Browsers.CHROME;
-        Configuration.timeout = 5000;
-        Configuration.pollingInterval = 300;
-        Configuration.screenshots = false;
-        Configuration.startMaximized = true;
+    public synchronized void initTest(Method method) {
         SelenideLogger.addListener("AllureSelenideListener", new AllureListener());
         String url = System.getProperty("remoteUrl");
 
         if (!url.isEmpty()) {
-            DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-            desiredCapabilities.setBrowserName("chrome");
-            desiredCapabilities.setCapability("enableVNC", true);
-            desiredCapabilities.setVersion("73");
-            desiredCapabilities.setCapability("screenResolution", "1920x1080x24");
-//            desiredCapabilities.setCapability("enableVideo", true);
-            desiredCapabilities.merge(options);
-//            Configuration.remote = "http://192.168.1.72:4444/wd/hub"; //local selenoid
-            Configuration.remote = "http://" + url + ":4444/wd/hub"; //local selenoid
-            Configuration.browserCapabilities = desiredCapabilities;
+            DesiredCapabilities desiredCapabilities = new DesiredCapabilities() {{
+                setBrowserName("chrome");
+                setCapability("enableVNC", true);
+                setVersion("73");
+                setCapability("screenResolution", "1920x1080x24");
+                setCapability("enableVideo", true);
+                setCapability("name", method.getName());
+            }};
+
+            SelenideConfig selenideConfig = new SelenideConfig() {{
+                browserCapabilities(desiredCapabilities);
+                remote("http://" + url + ":4444/wd/hub");
+                browser(Browsers.CHROME);
+                startMaximized(true);
+                timeout(5000);
+            }};
+
+            SelenideDriver selenideDriver = new SelenideDriver(selenideConfig);
+            WebDriverRunner.setWebDriver(selenideDriver.getAndCheckWebDriver());
         }
 
         indexPageSelenide = open("https://epam.github.io/JDI/index.html", IndexPageSelenide.class);
