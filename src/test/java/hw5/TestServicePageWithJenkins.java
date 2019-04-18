@@ -65,7 +65,7 @@ public class TestServicePageWithJenkins {
     @Story("Configure different elements on the Service Page")
 
     @Test
-    public void testServicePageWithJenkins() {
+    public synchronized void testServicePageWithJenkins() {
 
         Configuration.assertionMode = AssertionMode.SOFT;
         DifferentElementsPage differentElementsPage;
@@ -130,14 +130,14 @@ public class TestServicePageWithJenkins {
     @Feature("Service Page")
     @Story("Configure different elements on the Service Page")
     @Test
-    public void firstTestForThreads() {
+    public synchronized void firstTestForThreads() {
         indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
     }
 
     @Feature("Service Page")
     @Story("Configure different elements on the Service Page")
     @Test
-    public void secondTestForThreads() {
+    public synchronized void secondTestForThreads() {
         indexPageSelenide.checkPageTitle(IndexPageTexts.PAGE_TITLE);
     }
 
