@@ -31,7 +31,7 @@ public class TestServicePageWithJenkins {
 
     //step 1: open test site by URL https://epam.github.io/JDI/
     @BeforeMethod
-    public void initTest(Method method) {
+    public synchronized void initTest(Method method) {
         SelenideLogger.addListener("AllureSelenideListener", new AllureListener());
         String url = System.getProperty("remoteUrl");
 
