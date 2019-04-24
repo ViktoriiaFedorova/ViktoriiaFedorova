@@ -1,10 +1,9 @@
 package base.hw4;
 
 import com.codeborne.selenide.*;
-import enums.IndexPageTexts;
-import enums.Users;
+import enums.hw1.IndexPageTexts;
+import enums.hw1.Users;
 import io.qameta.allure.Step;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.page;

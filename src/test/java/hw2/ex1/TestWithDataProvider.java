@@ -1,7 +1,7 @@
 package hw2.ex1;
 
-import base.IndexPage;
-import base.SeleniumBase;
+import base.hw2.IndexPage;
+import base.hw1.SeleniumBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;

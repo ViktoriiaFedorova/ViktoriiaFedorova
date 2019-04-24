@@ -1,11 +1,11 @@
 package hw1;
 
-import base.IndexPage;
-import base.SeleniumBase;
-import enums.BenefitsSection;
-import enums.HeaderItems;
-import enums.IndexPageTexts;
-import enums.Users;
+import base.hw2.IndexPage;
+import base.hw1.SeleniumBase;
+import enums.hw1.BenefitsSection;
+import enums.hw1.HeaderItems;
+import enums.hw1.IndexPageTexts;
+import enums.hw1.Users;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;

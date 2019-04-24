@@ -1,7 +1,7 @@
-package base;
+package base.hw2;
 
-import enums.IndexPageTexts;
-import enums.Users;
+import enums.hw1.IndexPageTexts;
+import enums.hw1.Users;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

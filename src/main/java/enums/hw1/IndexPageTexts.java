@@ -1,4 +1,4 @@
-package enums;
+package enums.hw1;
 
 public enum IndexPageTexts {
     PAGE_TITLE("Home Page"),

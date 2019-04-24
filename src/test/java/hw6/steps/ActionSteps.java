@@ -14,4 +14,19 @@ public class ActionSteps {
 //        new SelenideIndexPage().login(user);
 //
 //    }
+
+    @When("^I login as user 'PITER_CHAILOVSKII'$")
+    public void login(){}
+
+    @When("^I select 'Water' and 'Wind' checkboxes$")
+    public void selectCheckboxes(){}
+
+    @When("^I select 'Selen' radio$")
+    public void selectRadio(){}
+
+    @When("^I select 'Yellow' in the dropdown$")
+    public void selectDropdownValue(){}
+
+    @When("^I unselect 'Water' and 'Wind' checkboxes$")
+    public void unselectCheckboxes(){}
 }

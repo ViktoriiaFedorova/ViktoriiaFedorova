@@ -1,4 +1,4 @@
-package enums;
+package enums.hw1;
 
 public enum BenefitsSection {
     PRACTISE("url(\"https://epam.github.io/JDI/images/sprite.png\")",

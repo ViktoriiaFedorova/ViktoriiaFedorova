@@ -1,4 +1,4 @@
-package enums;
+package enums.hw1;
 
 public enum Users {
 

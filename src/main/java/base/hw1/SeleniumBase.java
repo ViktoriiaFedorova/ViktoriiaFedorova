@@ -1,4 +1,4 @@
-package base;
+package base.hw1;
 
 import org.testng.annotations.BeforeSuite;
 
