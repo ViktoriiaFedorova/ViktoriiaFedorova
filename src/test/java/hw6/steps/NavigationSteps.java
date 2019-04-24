@@ -1,13 +1,13 @@
 package hw6.steps;
 
-import base.hw4.IndexPageSelenide;
+import base.hw6.IndexPageBDD;
 import cucumber.api.java.en.Given;
 
 import static com.codeborne.selenide.Selenide.open;
 
 public class NavigationSteps {
 
-    private IndexPageSelenide indexPageSelenide;
+    private IndexPageBDD indexPage;
 
     private static final String INDEX_PAGE_URL = "https://epam.github.io/JDI/index.html";
 
